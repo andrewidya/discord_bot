@@ -8,6 +8,7 @@ TOKEN = os.getenv("BOT_TOKEN")
 EXTENSIONS = [
     'cogs.greetings',
     'cogs.systems'
+    'cogs.game_roles'
 ]
 
 
