@@ -149,15 +149,81 @@ class WeaponRole(BaseRoleManager, name='weapon-utama-hunter'):
 
     @commands.command(name="heavy-bowgun", aliases=["hbg",], case_insensitive=True)
     async def heavy_bowgun(self, ctx):
-        """heavy_bowgun"""
+        """Heavy Bowgun"""
+        await self.set_role(ctx, ctx.command.name)
+
+
+class GameTitleRole(BaseRoleManager, name='title-series'):
+    """Title / Series Monster Hunter
+
+    Set judul seri game monster hunter yang saat ini
+    sedang dimainkan, dengan begini hunter lain lebih
+    mudah mencari teman berburu sesuai seri yang dimainkan    
+    """
+    @commands.group(name="set-title-series")
+    async def set_weapon(self, ctx):
+        """Untuk set judul seri game yang sedang dimainkan"""
+        if ctx.invoked_subcommand is None:
+            await ctx.send("set-title-series memerlukan paramater judul seri game")
+    
+    @commands.command(name="mhf1", case_insensitive=True)
+    async def mhf1(self, ctx):
+        """Monster Hunter Freedom 1"""
+        await self.set_role(ctx, ctx.command.name)
+
+    @commands.command(name="mhfu", case_insensitive=True)
+    async def mhfu(self, ctx):
+        """Monster Hunter Freedom United"""
+        await self.set_role(ctx, ctx.command.name)
+
+    @commands.command(name="mhp3rd", case_insensitive=True)
+    async def mhp3rd(self, ctx):
+        """Monster Hunter Portable 3rd"""
+        await self.set_role(ctx, ctx.command.name)
+
+    @commands.command(name="mh3u", case_insensitive=True)
+    async def mh3u(self, ctx):
+        """Monster Hunter 3 Ultimate"""
+        await self.set_role(ctx, ctx.command.name)
+
+    @commands.command(name="mh4u", case_insensitive=True)
+    async def mh4u(self, ctx):
+        """Monster Hunter 4 Ultimate"""
+        await self.set_role(ctx, ctx.command.name)
+
+    @commands.command(name="mhgen", case_insensitive=True)
+    async def mhgen(self, ctx):
+        """Monster Hunter Generation"""
+        await self.set_role(ctx, ctx.command.name)
+
+    @commands.command(name="mhxx", case_insensitive=True)
+    async def mhxx(self, ctx):
+        """Monster Hunter XX"""
+        await self.set_role(ctx, ctx.command.name)
+
+    @commands.command(name="mhgu", case_insensitive=True)
+    async def mhgu(self, ctx):
+        """Monster Hunter Generation Ultimate"""
+        await self.set_role(ctx, ctx.command.name)
+
+    @commands.command(name="mhw", case_insensitive=True)
+    async def mhw(self, ctx):
+        """Monster Hunter World"""
+        await self.set_role(ctx, ctx.command.name)
+
+    @commands.command(name="iceborne", case_insensitive=True)
+    async def mhwi(self, ctx):
+        """Monster Hunter World Iceborne"""
         await self.set_role(ctx, ctx.command.name)
 
 
 def setup(bot):
     bot.add_cog(PlatformRole(bot))
     bot.add_cog(WeaponRole(bot))
+    bot.add_cog(GameTitleRole(bot))
 
 
 def teardown(bot):
     bot.remove_cog('PlatformRole')
     bot.remove_cog('WeaponRole')
+    bot.remove_cog('GameTitleRole')
