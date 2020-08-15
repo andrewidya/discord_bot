@@ -2,12 +2,14 @@ import os
 
 import discord
 from discord.ext import commands
+from discord.ext.commands.help import DefaultHelpCommand
 
 
 TOKEN = os.getenv("BOT_TOKEN")
 EXTENSIONS = [
     'cogs.greetings',
-    'cogs.systems'
+    'cogs.systems',
+    'cogs.game_roles'
 ]
 
 
@@ -19,10 +21,9 @@ class GuildMarm(commands.Bot):
                 for channel in guild.channels:
                     if channel.name == "general":
                         await channel.send(
-                            content="Halo salam hunter!!!, selamat berburu")
+                            content="Halo salam hunter!!!, selamat berburu :grinning::clap:")
                         break
                 break
-                       
 
 if __name__ == "__main__":
     guildmarm = GuildMarm(command_prefix="!", owner_id=489318848731021312)
