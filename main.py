@@ -12,6 +12,17 @@ EXTENSIONS = [
     'cogs.game_roles'
 ]
 
+class HelpCommand(DefaultHelpCommand):
+    def __init__(self, **options):
+        super().__init__(**options)
+
+    def get_ending_note(self):
+        """Returns help command's ending note. This is overrided version on i18n purposes."""
+        command_name = self.invoked_with
+        return "Ketik {0}{1} <command> untuk info lebih lanjut.\n" \
+               "Kamu juga bisa ketik {0}{1} <category> untuk info category.".format(
+                   self.clean_prefix, command_name)
+
 
 class GuildMarm(commands.Bot):
     async def on_ready(self):
@@ -26,8 +37,12 @@ class GuildMarm(commands.Bot):
                 break
 
 if __name__ == "__main__":
-    guildmarm = GuildMarm(command_prefix="!", owner_id=489318848731021312)
-
+    help_command = HelpCommand(command_attrs={'help': 'Tampilkan pesan ini'})
+    guildmarm = GuildMarm(
+        command_prefix="!",
+        owner_id=489318848731021312,
+        help_command=help_command)
+        
     for ext in EXTENSIONS:
         guildmarm.load_extension(ext)
 
