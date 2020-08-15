@@ -6,7 +6,8 @@ from discord.ext import commands
 
 TOKEN = os.getenv("BOT_TOKEN")
 EXTENSIONS = [
-    'cogs.greetings'
+    'cogs.greetings',
+    'cogs.systems'
 ]
 
 
@@ -21,10 +22,11 @@ class GuildMarm(commands.Bot):
                             content="Halo salam hunter!!!, selamat berburu")
                         break
                 break
-
+                       
 
 if __name__ == "__main__":
-    guildmarm = GuildMarm(command_prefix="!")
+    guildmarm = GuildMarm(command_prefix="!", owner_id=489318848731021312)
+
     for ext in EXTENSIONS:
         guildmarm.load_extension(ext)
 
