@@ -79,4 +79,4 @@ def setup(bot):
 
 
 def teardown(bot):
-    bot.remove_cog(Maintenance(bot))
+    bot.remove_cog('Maintenance')
