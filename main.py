@@ -4,8 +4,11 @@ import discord
 from discord.ext import commands
 from discord.ext.commands.help import DefaultHelpCommand
 
+import config
+
 
 TOKEN = os.getenv("BOT_TOKEN")
+ECO = config.GUILD_ECOSYSTEM
 EXTENSIONS = [
     'cogs.greetings',
     'cogs.systems',
@@ -28,9 +31,9 @@ class GuildMarm(commands.Bot):
     async def on_ready(self):
         print("Logged to guild {0}".format(self.user.name))
         for guild in self.guilds:
-            if guild.name == "andre_bot_dev":
+            if guild.name in ECO:
                 for channel in guild.channels:
-                    if channel.name == "general":
+                    if channel.name in ECO[guild.name]["allowed_channel"]:
                         await channel.send(
                             content="Halo salam hunter!!!, selamat berburu :grinning::clap:")
                         break
@@ -39,8 +42,8 @@ class GuildMarm(commands.Bot):
 if __name__ == "__main__":
     help_command = HelpCommand(command_attrs={'help': 'Tampilkan pesan ini'})
     guildmarm = GuildMarm(
-        command_prefix="!",
-        owner_id=489318848731021312,
+        command_prefix=config.COMMAN_PREFIX,
+        owner_id=config.OWNER_ID,
         help_command=help_command)
         
     for ext in EXTENSIONS:
