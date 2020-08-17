@@ -19,18 +19,18 @@ class BaseRoleManager(commands.Cog):
         for role in guild_roles:
             if role.lower().replace(" ", "-") == role_name:
                 role_found = True
-            author_roles = self.get_member_roles(ctx)
+                author_roles = self.get_member_roles(ctx)
                 if role not in author_roles and not ctx.author.bot:
                     new_role = ctx.guild.get_role(guild_roles[role])
                     await ctx.author.add_roles(new_role, reason="set platform from bot")
-            else:
-                await ctx.send("Maaf {0}, tapi kayaknya kamu udah ngeset "\
+                else:
+                    await ctx.send("Maaf {0}, tapi kayaknya kamu udah ngeset "\
                         "role {1} deh".format(ctx.author.name, role_name))
                 break
         
         if not role_found:
             await ctx.send("Role {0} nggak ada nih, tunggu dibikinin sama "\
-                    "bang adminnya ya".format(role_name))
+                "bang adminnya ya".format(role_name))
 
 
 class PlatformRole(BaseRoleManager, name="platform-hunter"):
@@ -44,7 +44,7 @@ class PlatformRole(BaseRoleManager, name="platform-hunter"):
         if ctx.invoked_subcommand is None:
             await ctx.send("set-plaform memerlukan paramater nama platform")
 
-    @platform.command(name="n3ds", case_insensitive=True)
+    @platform.command(name="n3ds", aliases=["3ds"], case_insensitive=True)
     async def n3ds(self, ctx):
         """Nintendo 3ds"""
         await self.set_role(ctx, ctx.command.name)
@@ -59,17 +59,22 @@ class PlatformRole(BaseRoleManager, name="platform-hunter"):
         """PC"""
         await self.set_role(ctx, ctx.command.name)
 
-    @platform.command(name="pc-citra", case_insensitive=True)
-    async def ps4(self, ctx):
+    @platform.command(name="pc-citra", aliases=["citra"], case_insensitive=True)
+    async def pc_citra(self, ctx):
         """PC Citra"""
         await self.set_role(ctx, ctx.command.name)
 
+    @platform.command(name="android", aliases=["android-citra", "citra-android"], case_insensitive=True)
+    async def android_citra(self, ctx):
+        """Android Citra"""
+        await self.set_role(ctx, ctx.command.name)
+
     @platform.command(name="pc-pspp", case_insensitive=True)
-    async def ps4(self, ctx):
+    async def pc_pspp(self, ctx):
         """PC PSPP"""
         await self.set_role(ctx, ctx.command.name)  
 
-    @platform.command(name="switch", case_insensitive=True)
+    @platform.command(name="switch", aliases=["nswitch", "nintendo-switch"], case_insensitive=True)
     async def nswitch(self, ctx):
         """Nintendo Switch"""
         await self.set_role(ctx, ctx.command.name)
@@ -202,12 +207,12 @@ class GameTitleRole(BaseRoleManager, name='title-series'):
         """Monster Hunter Generation"""
         await self.set_role(ctx, ctx.command.name)
 
-    @set_title_series.command(name="mhxx", case_insensitive=True)
+    @set_title_series.command(name="mhxx", aliases=["mhxx-3ds"], case_insensitive=True)
     async def mhxx(self, ctx):
         """Monster Hunter XX"""
         await self.set_role(ctx, ctx.command.name)
 
-    @set_title_series.command(name="mhgu", case_insensitive=True)
+    @set_title_series.command(name="mhgu", aliases=["mhgu-switch"], case_insensitive=True)
     async def mhgu(self, ctx):
         """Monster Hunter Generation Ultimate"""
         await self.set_role(ctx, ctx.command.name)
