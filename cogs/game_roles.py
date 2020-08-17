@@ -14,15 +14,21 @@ class BaseRoleManager(commands.Cog):
 
     async def set_role(self, ctx, role_name):
         guild_roles = self.get_guild_roles(ctx)
-        if role_name in guild_roles and not ctx.author.bot:
+        role_found = False
+        
+        for role in guild_roles:
+            if role.lower().replace(" ", "-") == role_name:
+                role_found = True
             author_roles = self.get_member_roles(ctx)
-            if role_name not in author_roles:
-                role = ctx.guild.get_role(guild_roles[role_name])
-                await ctx.author.add_roles(role, reason="set platform from bot")
+                if role not in author_roles and not ctx.author.bot:
+                    new_role = ctx.guild.get_role(guild_roles[role])
+                    await ctx.author.add_roles(new_role, reason="set platform from bot")
             else:
                 await ctx.send("Maaf {0}, tapi kayaknya kamu udah ngeset "\
                         "role {1} deh".format(ctx.author.name, role_name))
-        else:
+                break
+        
+        if not role_found:
             await ctx.send("Role {0} nggak ada nih, tunggu dibikinin sama "\
                     "bang adminnya ya".format(role_name))
 
