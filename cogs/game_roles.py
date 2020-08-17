@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from utils import is_send_message_allowed
 
 
 class BaseRoleManager(commands.Cog):
@@ -12,6 +13,7 @@ class BaseRoleManager(commands.Cog):
     def get_member_roles(self, ctx):
         return { role.name: role.id for role in ctx.author.roles }
 
+    @is_send_message_allowed
     async def set_role(self, ctx, role_name):
         guild_roles = self.get_guild_roles(ctx)
         role_found = False
