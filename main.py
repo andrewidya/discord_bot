@@ -26,6 +26,14 @@ class HelpCommand(DefaultHelpCommand):
                "Kamu juga bisa ketik {0}{1} <category> untuk info category.".format(
                    self.clean_prefix, command_name)
 
+    def command_not_found(self, string):
+        return "Command {} tidak ada".format(string)
+
+    def subcommand_not_found(self, command, string):
+        if isinstance(command, discord.core.Group) and len(command.all_commands) > 0:
+            return 'Command "{0.qualified_name}" tidak punya subcommand {1}'.format(command, string)
+        return 'Command "{0.qualified_name}" tidak punya subcommand'.format(command)
+
 
 class GuildMarm(commands.Bot):
     async def on_ready(self):
