@@ -59,40 +59,40 @@ class PlatformRole(BaseRoleManager, name="platform-hunter"):
         if ctx.invoked_subcommand is none:
             await ctx.send("set-plaform memerlukan paramater nama platform")
 
-    @platform.command(name="n3ds", aliases=["3ds"], case_insensitive=true)
+    @platform.command(name="n3ds", aliases=["3ds"], case_insensitive=True)
     async def n3ds(self, ctx):
         """nintendo 3ds"""
         await self.set_role(ctx, ctx.command.name)
 
-    @platform.command(name="ps4", case_insensitive=true)
+    @platform.command(name="ps4", case_insensitive=True)
     async def ps4(self, ctx):
         """play station 4"""
         await self.set_role(ctx, ctx.command.name)
 
-    @platform.command(name="pc", case_insensitive=true)
+    @platform.command(name="pc", case_insensitive=True)
     async def pc(self, ctx):
         """pc"""
         await self.set_role(ctx, ctx.command.name)
 
-    @platform.command(name="pc-citra", aliases=["citra"], case_insensitive=true)
+    @platform.command(name="pc-citra", aliases=["citra"], case_insensitive=True)
     async def pc_citra(self, ctx):
         """pc citra"""
         await self.set_role(ctx, ctx.command.name)
 
     @platform.command(
         name="android", aliases=["android-citra", "citra-android"],
-        case_insensitive=true)
+        case_insensitive=True)
     async def android_citra(self, ctx):
         """android citra"""
         await self.set_role(ctx, ctx.command.name)
 
-    @platform.command(name="pc-pspp", case_insensitive=true)
+    @platform.command(name="pc-pspp", case_insensitive=True)
     async def pc_pspp(self, ctx):
         """pc pspp"""
         await self.set_role(ctx, ctx.command.name)
 
     @platform.command(
-        name="switch", aliases=["nswitch", "nintendo-switch"], case_insensitive=true)
+        name="switch", aliases=["nswitch", "nintendo-switch"], case_insensitive=True)
     async def nswitch(self, ctx):
         """nintendo switch"""
         await self.set_role(ctx, ctx.command.name)
@@ -338,40 +338,40 @@ class SetupRole(BaseRoleManager, name='set-role'):
 
     # comman for platform role setup
     # ex: PS4, PC etc
-    @main_set_role.command(name="n3ds", aliases=["3ds"], case_insensitive=true)
+    @main_set_role.command(name="n3ds", aliases=["3ds"], case_insensitive=True)
     async def n3ds(self, ctx):
         """nintendo 3ds"""
         await self.set_role(ctx, ctx.command.name)
 
-    @main_set_role.command(name="ps4", case_insensitive=true)
+    @main_set_role.command(name="ps4", case_insensitive=True)
     async def ps4(self, ctx):
         """play station 4"""
         await self.set_role(ctx, ctx.command.name)
 
-    @main_set_role.command(name="pc", case_insensitive=true)
+    @main_set_role.command(name="pc", case_insensitive=True)
     async def pc(self, ctx):
         """pc"""
         await self.set_role(ctx, ctx.command.name)
 
-    @main_set_role.command(name="pc-citra", aliases=["citra"], case_insensitive=true)
+    @main_set_role.command(name="pc-citra", aliases=["citra"], case_insensitive=True)
     async def pc_citra(self, ctx):
         """pc citra"""
         await self.set_role(ctx, ctx.command.name)
 
     @main_set_role.command(
         name="android", aliases=["android-citra", "citra-android"],
-        case_insensitive=true)
+        case_insensitive=True)
     async def android_citra(self, ctx):
         """android citra"""
         await self.set_role(ctx, ctx.command.name)
 
-    @main_set_role.command(name="pc-pspp", case_insensitive=true)
+    @main_set_role.command(name="pc-pspp", case_insensitive=True)
     async def pc_pspp(self, ctx):
         """pc pspp"""
         await self.set_role(ctx, ctx.command.name)
 
     @main_set_role.command(
-        name="switch", aliases=["nswitch", "nintendo-switch"], case_insensitive=true)
+        name="switch", aliases=["nswitch", "nintendo-switch"], case_insensitive=True)
     async def nswitch(self, ctx):
         """nintendo switch"""
         await self.set_role(ctx, ctx.command.name)
