@@ -12,6 +12,14 @@ class BaseRoleManager(commands.Cog):
     def get_member_roles(self, ctx):
         return {role.name: role.id for role in ctx.author.roles}
 
+    async def role_change_message(self, ctx, command, role):
+        author_roles = self.get_guild_roles(ctx)
+        if command == "set" and role in author_roles:
+            await ctx.send("Kamu baru saja terdaftar dalam role {0}".format(role))
+        if command == "unset" and role not in author_roles:
+            await ctx.send("Kamu baru saja keluar dari role {0}".format(role))
+
+
     @is_send_message_allowed
     async def set_role(self, ctx, role_name):
         guild_roles = self.get_guild_roles(ctx)
@@ -24,6 +32,7 @@ class BaseRoleManager(commands.Cog):
                 if role not in author_roles and not ctx.author.bot:
                     new_role = ctx.guild.get_role(guild_roles[role])
                     await ctx.author.add_roles(new_role, reason="set platform from bot")
+                    await self.role_change_message(ctx, "set", role)
                 else:
                     await ctx.send("Maaf {0}, tapi kayaknya kamu udah ngeset "
                                    "role {1} deh".format(ctx.author.name, role_name))
@@ -45,6 +54,7 @@ class BaseRoleManager(commands.Cog):
                 if role in author_roles and not ctx.author.bot:
                     role_to_remove = guild_roles[role]
                     await ctx.author.remove_roles(role_to_remove, reason="unset platform from bot")
+                    await self.role_change_message(ctx, "unset", role)
                 break
 
 
