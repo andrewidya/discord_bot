@@ -128,7 +128,7 @@ class WeaponRole(BaseRoleManager, name='weapon-utama-hunter'):
         """Sword & Shield"""
         await self.set_role(ctx, ctx.command.name)
 
-    @set_weapon.command(name="dual-blade", aliases=["db", ":DB:"], case_insensitive=True)
+    @set_weapon.command(name="dual-blades", aliases=["db", ":DB:"], case_insensitive=True)
     async def dual_blade(self, ctx):
         """Dual Blade"""
         await self.set_role(ctx, ctx.command.name)
@@ -395,8 +395,8 @@ class SetupRole(BaseRoleManager, name='set-role'):
         """Sword & Shield"""
         await self.set_role(ctx, ctx.command.name)
 
-    @main_set_role.command(name="dual-blade", aliases=["db", ":DB:"], case_insensitive=True)
-    async def dual_blade(self, ctx):
+    @main_set_role.command(name="dual-blades", aliases=["db", ":DB:"], case_insensitive=True)
+    async def dual_blades(self, ctx):
         """Dual Blade"""
         await self.set_role(ctx, ctx.command.name)
 
