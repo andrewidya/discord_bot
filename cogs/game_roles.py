@@ -16,7 +16,7 @@ class BaseRoleManager(commands.Cog):
         author_roles = self.get_guild_roles(ctx)
         if command == "set" and role in author_roles:
             await ctx.send("Kamu baru saja terdaftar dalam role {0}".format(role))
-        if command == "unset" and role not in author_roles:
+        if command == "unset" and role:
             await ctx.send("Kamu baru saja keluar dari role {0}".format(role))
 
 
@@ -52,9 +52,11 @@ class BaseRoleManager(commands.Cog):
                 role_found = True
                 author_roles = self.get_member_roles(ctx)
                 if role in author_roles and not ctx.author.bot:
-                    role_to_remove = guild_roles[role]
-                    await ctx.author.remove_roles(role_to_remove, reason="unset platform from bot")
-                    await self.role_change_message(ctx, "unset", role)
+                    role_id = guild_roles[role]
+                    role_to_remove = [i for i in ctx.author.roles if i.id == role_id]
+                    for r in role_to_remove:
+                        await ctx.author.remove_roles(r, reason="unset platform from bot")
+                        await self.role_change_message(ctx, "unset", role)
                 break
 
 
@@ -285,14 +287,11 @@ class SetupRole(BaseRoleManager, name='set-role'):
         if ctx.invoked_subcommand is None:
             await ctx.send("command 'set' memerlukan info yang mau di set")
 
-    @commands.command(name="unset")
-    async def unset(self, ctx, arg):
-        """Untuk unset role"""
-        if not arg:
-            await ctx.send("command 'unset' memerlukan info role yang mau di unset")
-        else:
-            await self.unset(ctx, arg)
-    
+    @commands.group(name="unset")
+    async def main_unset_role(self, ctx):
+        if ctx.invoked_subcommand is None:
+            await ctx.send("command 'unset' memerlukan info yang mau di unset")
+
     # command for game title specific
     # ex: mhf1, mh4u, mhwi etc
     @main_set_role.command(name="mhf1", case_insensitive=True)
