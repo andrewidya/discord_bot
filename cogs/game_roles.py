@@ -50,10 +50,13 @@ class BaseRoleManager(commands.Cog):
 
     async def role_change_message(self, ctx, command, role):
         author_roles = self.get_guild_roles(ctx)
+        message = ""
         if command == "set" and role in author_roles:
-            await ctx.send("Kamu baru saja terdaftar dalam role {0}".format(role))
+            message = "Kamu baru saja terdaftar dalam role {0}".format(role)
         if command == "unset" and role:
-            await ctx.send("Kamu baru saja keluar dari role {0}".format(role))
+            message = "Kamu baru saja keluar dari role {0}".format(role)
+        
+        await ctx.send(message)
 
 
     @is_send_message_allowed
