@@ -4,7 +4,7 @@ GUILD_ECOSYSTEM = {
     "andre_bot_dev": {
         "allowed_channel": ["general"]
     },
-    "HAN 7 & FRIENDS": {
+    "HAN 7": {
         "allowed_channel": ["bot-test"]
     }
 }
