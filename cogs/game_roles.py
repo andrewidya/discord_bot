@@ -2,6 +2,42 @@ from discord.ext import commands
 from utils import is_send_message_allowed
 
 
+role_maps = {
+    "mhfu": "mhfu",
+    "mhp3rd": "mhp3rd",
+    "mh3u": "mh3u",
+    "mh4u": "mh4u",
+    "mhgen": "mhgen",
+    "mhxx": "mhxx",
+    "mhgu": "mhgu",
+    "mhw": "mhw",
+    "iceborne": "iceborne",
+    # Platform
+    "n3ds": "n3ds",
+    "ps4": "ps4",
+    "pc": "pc",
+    "citra": "citra",
+    "android": "android",
+    "pc-pspp": "pc-pspp",
+    "switch": "switch",
+    # Weapon
+    "gs": "great-sword",
+    "ls": "long-sword",
+    "sns": "sword-and-shield",
+    "db": "dual-blades",
+    "h": "hammer",
+    "hh": "hunting-horn",
+    "lance": "lance",
+    "gl": "gunlance",
+    "ig": "insect-glaive",
+    "cb": "charge-blade",
+    "sa": "switch-axe",
+    "bow": "bow",
+    "lbg": "ligth-bowgun",
+    "hbg": "heavy-bowgun"
+}
+
+
 class BaseRoleManager(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -21,7 +57,8 @@ class BaseRoleManager(commands.Cog):
 
 
     @is_send_message_allowed
-    async def set_role(self, ctx, role_name):
+    async def set_role(self, ctx, role):
+        role_name = role_maps[role]
         guild_roles = self.get_guild_roles(ctx)
         role_found = False
 
@@ -43,7 +80,8 @@ class BaseRoleManager(commands.Cog):
                            "bang adminnya ya".format(role_name))
 
     @is_send_message_allowed
-    async def unset_role(self, ctx, role_name):
+    async def unset_role(self, ctx, role):
+        role_name = role_maps[role]
         guild_roles = self.get_guild_roles(ctx)
         role_found = False
 
@@ -476,67 +514,67 @@ class SetupRole(BaseRoleManager, name='set-role'):
     # command for main weapon setup
     # ex: switch axe, great sword etc
     @main_set_role.command(
-        name="great-sword", aliases=["gs", ":GS:"], case_insensitive=True)
+        name="gs", aliases=["great-sword", ":GS:"], case_insensitive=True)
     async def great_sword(self, ctx):
         """Great Sword"""
         await self.set_role(ctx, ctx.command.name)
 
     @main_unset_role.command(
-        name="great-sword", aliases=["gs", ":GS:"], case_insensitive=True)
+        name="gs", aliases=["great-sword", ":GS:"], case_insensitive=True)
     async def unset_great_sword(self, ctx):
         """Great Sword"""
         await self.unset_role(ctx, ctx.command.name)
 
-    @main_set_role.command(name="long-sword", aliases=["ls", ":LS:"], case_insensitive=True)
+    @main_set_role.command(name="ls", aliases=["long-sword", ":LS:"], case_insensitive=True)
     async def long_sword(self, ctx):
         """Long Sword"""
         await self.set_role(ctx, ctx.command.name)
 
-    @main_unset_role.command(name="long-sword", aliases=["ls", ":LS:"], case_insensitive=True)
+    @main_unset_role.command(name="ls", aliases=["long-sword", ":LS:"], case_insensitive=True)
     async def unset_long_sword(self, ctx):
         """Long Sword"""
         await self.unset_role(ctx, ctx.command.name)
 
     @main_set_role.command(
-        name="sword-and-shield", aliases=["sns", ":SNS:"], case_insensitive=True)
+        name="sns", aliases=["sword-and-shield", ":SNS:"], case_insensitive=True)
     async def sword_and_shield(self, ctx):
         """Sword & Shield"""
         await self.set_role(ctx, ctx.command.name)
 
     @main_unset_role.command(
-        name="sword-and-shield", aliases=["sns", ":SNS:"], case_insensitive=True)
+        name="sns", aliases=["sword-and-shield", ":SNS:"], case_insensitive=True)
     async def unset_sword_and_shield(self, ctx):
         """Sword & Shield"""
         await self.unset_role(ctx, ctx.command.name)
 
-    @main_set_role.command(name="dual-blades", aliases=["db", ":DB:"], case_insensitive=True)
+    @main_set_role.command(name="db", aliases=["dual-blades", ":DB:"], case_insensitive=True)
     async def dual_blades(self, ctx):
         """Dual Blade"""
         await self.set_role(ctx, ctx.command.name)
 
-    @main_unset_role.command(name="dual-blades", aliases=["db", ":DB:"], case_insensitive=True)
+    @main_unset_role.command(name="db", aliases=["dual-blades", ":DB:"], case_insensitive=True)
     async def unset_dual_blades(self, ctx):
         """Dual Blade"""
         await self.unset_role(ctx, ctx.command.name)
 
-    @main_set_role.command(name="hamer", aliases=["hmr", ":Hammer:"], case_insensitive=True)
+    @main_set_role.command(name="h", aliases=["hammer", ":Hammer:"], case_insensitive=True)
     async def hammer(self, ctx):
         """Hammer"""
         await self.set_role(ctx, ctx.command.name)
 
-    @main_unset_role.command(name="hamer", aliases=["hmr", ":Hammer:"], case_insensitive=True)
+    @main_unset_role.command(name="h", aliases=["hamer", ":Hammer:"], case_insensitive=True)
     async def unset_hammer(self, ctx):
         """Hammer"""
         await self.unset_role(ctx, ctx.command.name)
 
     @main_set_role.command(
-        name="hunting-horn", aliases=["hh", ":HH:"], case_insensitive=True)
+        name="hh", aliases=["hunting-horn", ":HH:"], case_insensitive=True)
     async def hunting_horn(self, ctx):
         """Hunting Horn"""
         await self.set_role(ctx, ctx.command.name)
 
     @main_unset_role.command(
-        name="hunting-horn", aliases=["hh", ":HH:"], case_insensitive=True)
+        name="hh", aliases=["hunting-horn", ":HH:"], case_insensitive=True)
     async def unset_hunting_horn(self, ctx):
         """Hunting Horn"""
         await self.unset_role(ctx, ctx.command.name)
@@ -551,46 +589,46 @@ class SetupRole(BaseRoleManager, name='set-role'):
         """Lance"""
         await self.unset_role(ctx, ctx.command.name)
 
-    @main_set_role.command(name="gunlance", aliases=["gl", ":GL:"], case_insensitive=True)
+    @main_set_role.command(name="gl", aliases=["gunlance", ":GL:"], case_insensitive=True)
     async def gunlance(self, ctx):
         """Gunlance"""
         await self.set_role(ctx, ctx.command.name)
 
-    @main_unset_role.command(name="gunlance", aliases=["gl", ":GL:"], case_insensitive=True)
+    @main_unset_role.command(name="gl", aliases=["gunlance", ":GL:"], case_insensitive=True)
     async def unset_gunlance(self, ctx):
         """Gunlance"""
         await self.unset_role(ctx, ctx.command.name)
 
     @main_set_role.command(
-        name="insect-glaive", aliases=["ig", ":IG:"], case_insensitive=True)
+        name="ig", aliases=["insect-glaive", ":IG:"], case_insensitive=True)
     async def insect_glaive(self, ctx):
         """Insect Glaive"""
         await self.set_role(ctx, ctx.command.name)
 
     @main_unset_role.command(
-        name="insect-glaive", aliases=["ig", ":IG:"], case_insensitive=True)
+        name="ig", aliases=["insect-glaive", ":IG:"], case_insensitive=True)
     async def unset_insect_glaive(self, ctx):
         """Insect Glaive"""
         await self.unset_role(ctx, ctx.command.name)
 
     @main_set_role.command(
-        name="charge-blade", aliases=["cb", ":CB:"], case_insensitive=True)
+        name="cb", aliases=["charge-blade", ":CB:"], case_insensitive=True)
     async def charge_blade(self, ctx):
         """Charge Blade"""
         await self.set_role(ctx, ctx.command.name)
 
     @main_unset_role.command(
-        name="charge-blade", aliases=["cb", ":CB:"], case_insensitive=True)
+        name="cb", aliases=["charge-blade", ":CB:"], case_insensitive=True)
     async def unset_charge_blade(self, ctx):
         """Charge Blade"""
         await self.unset_role(ctx, ctx.command.name)
 
-    @main_set_role.command(name="switch-axe", aliases=["sa", ":SA:"], case_insensitive=True)
+    @main_set_role.command(name="sa", aliases=["switch-axe", ":SA:"], case_insensitive=True)
     async def switch_axe(self, ctx):
         """Switch Axe"""
         await self.set_role(ctx, ctx.command.name)
 
-    @main_unset_role.command(name="switch-axe", aliases=["sa", ":SA:"], case_insensitive=True)
+    @main_unset_role.command(name="sa", aliases=["switch-axe", ":SA:"], case_insensitive=True)
     async def unset_switch_axe(self, ctx):
         """Switch Axe"""
         await self.unset_role(ctx, ctx.command.name)
@@ -606,25 +644,25 @@ class SetupRole(BaseRoleManager, name='set-role'):
         await self.unset_role(ctx, ctx.command.name)
 
     @main_set_role.command(
-        name="light-bowgun", aliases=["lbg", ":LBG:"], case_insensitive=True)
+        name="lbg", aliases=["ligth-bowgun", ":LBG:"], case_insensitive=True)
     async def light_bowgun(self, ctx):
         """Light Bowgun"""
         await self.set_role(ctx, ctx.command.name)
 
     @main_unset_role.command(
-        name="light-bowgun", aliases=["lbg", ":LBG:"], case_insensitive=True)
+        name="lbg", aliases=["light-bowgun", ":LBG:"], case_insensitive=True)
     async def unset_light_bowgun(self, ctx):
         """Light Bowgun"""
         await self.unset_role(ctx, ctx.command.name)
 
     @main_set_role.command(
-        name="heavy-bowgun", aliases=["hbg", ":HBG:"], case_insensitive=True)
+        name="hbg", aliases=["heavy-bowgun", ":HBG:"], case_insensitive=True)
     async def heavy_bowgun(self, ctx):
         """Heavy Bowgun"""
         await self.set_role(ctx, ctx.command.name)
 
     @main_unset_role.command(
-        name="heavy-bowgun", aliases=["hbg", ":HBG:"], case_insensitive=True)
+        name="hbg", aliases=["heavy-bowgun", ":HBG:"], case_insensitive=True)
     async def unset_heavy_bowgun(self, ctx):
         """Heavy Bowgun"""
         await self.unset_role(ctx, ctx.command.name)
