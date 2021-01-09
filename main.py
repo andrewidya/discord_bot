@@ -47,21 +47,6 @@ class HelpCommand(DefaultHelpCommand):
             as_lengths.append(discord.utils._string_width(name))
 
         return max(as_lengths, default=0)
-    
-    def add_indented_commands(self, commands, *, heading, max_size=None):
-        if not commands:
-            return
-        
-        self.paginator.add_line(heading)
-        max_size = max_size or self.get_max_size(commands)
-
-        get_width = discord.utils._string_width
-        for command in commands:
-            name = command.name
-            name += "|" + "|".join(command.aliases) if command.aliases else ""
-            width = max_size - (get_width(name) - len(name))
-            entry = '{0}{1:<{width}} {2}'.format(self.indent * ' ', name, command.short_doc, width=width)
-            self.paginator.add_line(self.shorten_text(entry))
 
 
 class GuildMarm(commands.Bot):
