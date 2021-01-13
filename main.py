@@ -63,12 +63,22 @@ class GuildMarm(commands.Bot):
                 break
 
 
+async def on_member_join(member):
+    channel = member.guild.system_channel
+    if channel is not None:
+        message = "Selamat datang {0.mention}, " \
+            " selamat berbelanja".format(member)
+        await channel.send(message)
+
+
 if __name__ == "__main__":
     help_command = HelpCommand(command_attrs={'help': 'Tampilkan pesan ini'})
     guildmarm = GuildMarm(
         command_prefix=config.COMMAN_PREFIX,
         owner_id=config.OWNER_ID,
         help_command=help_command)
+
+    guildmarm.add_listener(on_member_join, 'on_member_join')
 
     for ext in EXTENSIONS:
         guildmarm.load_extension(ext)
