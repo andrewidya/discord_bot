@@ -266,12 +266,12 @@ class SetupRole(BaseRoleManager, name='set-role'):
         """pc"""
         await self.unset_role(ctx, ctx.command.name)
 
-    @main_set_role.command(name="citra", aliases=["citra"], case_insensitive=True)
+    @main_set_role.command(name="citra", case_insensitive=True)
     async def citra(self, ctx):
         """pc citra"""
         await self.set_role(ctx, ctx.command.name)
 
-    @main_unset_role.command(name="citra", aliases=["citra"], case_insensitive=True)
+    @main_unset_role.command(name="citra", case_insensitive=True)
     async def unset_citra(self, ctx):
         """pc citra"""
         await self.unset_role(ctx, ctx.command.name)
