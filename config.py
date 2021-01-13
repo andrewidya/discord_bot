@@ -5,6 +5,6 @@ GUILD_ECOSYSTEM = {
         "allowed_channel": ["general"]
     },
     "HAN 7": {
-        "allowed_channel": ["bot-test"]
+        "allowed_channel": ["bot-command"]
     }
 }
