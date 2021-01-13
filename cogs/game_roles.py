@@ -1,8 +1,10 @@
 from discord.ext import commands
+from functools import wraps
 from utils import is_send_message_allowed
 
 
 role_maps = {
+    "hunter": "hunter",
     "mhfu": "mhfu",
     "mhp3rd": "mhp3rd",
     "mh3u": "mh3u",
@@ -12,6 +14,7 @@ role_maps = {
     "mhgu": "mhgu",
     "mhw": "mhw",
     "iceborne": "iceborne",
+    "mhrise": "mhrise",
     # Platform
     "n3ds": "n3ds",
     "ps4": "ps4",
@@ -36,6 +39,8 @@ role_maps = {
     "lbg": "ligth-bowgun",
     "hbg": "heavy-bowgun"
 }
+
+available_roles = []
 
 
 class BaseRoleManager(commands.Cog):
@@ -462,6 +467,26 @@ class SetupRole(BaseRoleManager, name='set-role'):
         name="hbg", aliases=["heavy-bowgun", ":HBG:"], case_insensitive=True)
     async def unset_heavy_bowgun(self, ctx):
         """Heavy Bowgun"""
+        await self.unset_role(ctx, ctx.command.name)
+
+    @main_set_role.command(name="hunter", aliases=["Hunter"], case_insensitive=True)
+    async def hunter(self, ctx):
+        """Set Hunter General"""
+        await self.set_role(ctx, ctx.command.name)
+
+    @main_unset_role.command(name="hunter", aliases=["Hunter"], case_insensitive=True)
+    async def unset_hunter(self, ctx):
+        """Unset Hunter Role"""
+        await self.unset_role(ctx, ctx.command.name)
+
+    @main_set_role.command(name="mhrise", aliases=["MH Rise"], case_insensitive=True)
+    async def set_mhrise(self, ctx):
+        """Monster Hunter Rise"""
+        await self.set_role(ctx, ctx.command.name)
+
+    @main_unset_role.command(name="mhrise", aliases=["MH Rise"], case_insensitive=True)
+    async def unset_mhrise(self, ctx):
+        """Unset Monster Hunter Rise Role"""
         await self.unset_role(ctx, ctx.command.name)
 
 
