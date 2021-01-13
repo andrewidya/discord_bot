@@ -1,0 +1,3 @@
+*.json diff='jsondiff'
+coc-settings.json
+*.pyc
