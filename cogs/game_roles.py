@@ -21,7 +21,6 @@ role_maps = {
     "pc": "pc",
     "citra": "citra",
     "android": "android",
-    "pc-pspp": "pc-pspp",
     "switch": "switch",
     # Weapon
     "gs": "great-sword",
@@ -267,13 +266,13 @@ class SetupRole(BaseRoleManager, name='set-role'):
         """pc"""
         await self.unset_role(ctx, ctx.command.name)
 
-    @main_set_role.command(name="pc-citra", aliases=["citra"], case_insensitive=True)
-    async def pc_citra(self, ctx):
+    @main_set_role.command(name="citra", aliases=["citra"], case_insensitive=True)
+    async def citra(self, ctx):
         """pc citra"""
         await self.set_role(ctx, ctx.command.name)
 
-    @main_unset_role.command(name="pc-citra", aliases=["citra"], case_insensitive=True)
-    async def unset_pc_citra(self, ctx):
+    @main_unset_role.command(name="citra", aliases=["citra"], case_insensitive=True)
+    async def unset_citra(self, ctx):
         """pc citra"""
         await self.unset_role(ctx, ctx.command.name)
 
@@ -289,16 +288,6 @@ class SetupRole(BaseRoleManager, name='set-role'):
         case_insensitive=True)
     async def unset_android_citra(self, ctx):
         """android citra"""
-        await self.unset_role(ctx, ctx.command.name)
-
-    @main_set_role.command(name="pc-pspp", case_insensitive=True)
-    async def pc_pspp(self, ctx):
-        """pc pspp"""
-        await self.set_role(ctx, ctx.command.name)
-
-    @main_unset_role.command(name="pc-pspp", case_insensitive=True)
-    async def unset_pc_pspp(self, ctx):
-        """pc pspp"""
         await self.unset_role(ctx, ctx.command.name)
 
     @main_set_role.command(
