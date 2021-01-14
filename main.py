@@ -38,17 +38,6 @@ class HelpCommand(DefaultHelpCommand):
                         command, string)
         return 'Command "{0.qualified_name}" tidak punya subcommand'.format(command)
 
-    def get_max_size(self, commands):
-        as_lengths = []
-        for c in commands:
-            name = c.name
-            if c.aliases:
-                name += "|"
-                name += "|".join(c.aliases)
-            as_lengths.append(discord.utils._string_width(name))
-
-        return max(as_lengths, default=0)
-
 
 class GuildMarm(commands.Bot):
     async def on_ready(self):
