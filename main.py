@@ -4,6 +4,7 @@ import discord
 from discord.ext import commands
 from discord.ext.commands.help import DefaultHelpCommand
 
+
 import config
 
 
@@ -37,17 +38,6 @@ class HelpCommand(DefaultHelpCommand):
                         command, string)
         return 'Command "{0.qualified_name}" tidak punya subcommand'.format(command)
 
-    def get_max_size(self, commands):
-        as_lengths = []
-        for c in commands:
-            name = c.name
-            if c.aliases:
-                name += "|"
-                name += "|".join(c.aliases)
-            as_lengths.append(discord.utils._string_width(name))
-
-        return max(as_lengths, default=0)
-
 
 class GuildMarm(commands.Bot):
     async def on_ready(self):
@@ -63,22 +53,12 @@ class GuildMarm(commands.Bot):
                 break
 
 
-async def on_member_join(member):
-    channel = member.guild.system_channel
-    if channel is not None:
-        message = "Selamat datang {0.mention}, " \
-            " selamat berbelanja".format(member)
-        await channel.send(message)
-
-
 if __name__ == "__main__":
     help_command = HelpCommand(command_attrs={'help': 'Tampilkan pesan ini'})
     guildmarm = GuildMarm(
         command_prefix=config.COMMAN_PREFIX,
         owner_id=config.OWNER_ID,
         help_command=help_command)
-
-    guildmarm.add_listener(on_member_join, 'on_member_join')
 
     for ext in EXTENSIONS:
         guildmarm.load_extension(ext)
