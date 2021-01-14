@@ -10,10 +10,12 @@ class Greeting(commands.Cog):
     @commands.Cog.listener()
     async def on_member_join(self, member):
         channel = member.guild.system_channel
-        if channel is not None:
-            message = "Selamat datang {0.mention}," \
-                " selamat berbelanja".format(member)
-            await channel.send(message)
+        server_info = '<#798081750831726623>'
+        rules = '<#790776530733105214>'
+        message = "Halo {0.mention}, welcome to HAN7, silahkan baca \
+            {1} dan {2} dulu. jika ada pertanyaan bisa tanyakan admin.".format(
+                member, rules, server_info)
+        await channel.send(message)
 
 
 def setup(bot):
