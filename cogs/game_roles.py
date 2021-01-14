@@ -62,7 +62,6 @@ class BaseRoleManager(commands.Cog):
         
         await ctx.send(message)
 
-
     @is_send_message_allowed
     async def set_role(self, ctx, role):
         role_name = role_maps[role]
@@ -123,11 +122,19 @@ class SetupRole(BaseRoleManager, name='set-role'):
     @commands.group(name="set")
     async def main_set_role(self, ctx):
         """Untuk mengambil role"""
-        if ctx.invoked_subcommand is None:
+        if ctx.subcommand_passed:
+            if ctx.subcommand_passed not in ctx.command.all_commands.keys():
+                await ctx.send(
+                    "subcommand {} tidak ada, ketik !help untuk bantuan".format(ctx.subcommand_passed))
+        if ctx.invoked_subcommand is None and not ctx.subcommand_passed:
             await ctx.send("command 'set' memerlukan info yang mau di set")
 
     @commands.group(name="unset")
     async def main_unset_role(self, ctx):
+        if ctx.subcommand_passed:
+            if ctx.subcommand_passed not in ctx.command.all_commands.keys():
+                await ctx.send(
+                    "subcommand {} tidak ada, ketik !help untuk bantuan".format(ctx.subcommand_passed))
         if ctx.invoked_subcommand is None:
             await ctx.send("command 'unset' memerlukan info yang mau di unset")
 
