@@ -22,8 +22,9 @@ ptyprocess==0.7.0
 pudb==2019.2
 Pygments==2.6.1
 pytz==2020.5
+six==1.15.0
 sqlparse==0.4.1
-traitlets==5.0.5
+traitlets==4.3.3
 urwid==2.1.1
 wcwidth==0.2.5
 whitenoise==5.2.0
