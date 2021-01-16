@@ -21,7 +21,8 @@ ECO = config.GUILD_ECOSYSTEM
 EXTENSIONS = [
     'cogs.greetings',
     'cogs.systems',
-    'cogs.game_roles'
+    'cogs.game_roles',
+    'cogs.roulette'
 ]
 
 
