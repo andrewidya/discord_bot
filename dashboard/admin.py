@@ -10,9 +10,13 @@ class PlatformAdmin(admin.ModelAdmin):
     pass
 
 
+class PlatformReleasedSeriesInlineAdmin(admin.TabularInline):
+    model = PlatformReleasedSeries
+
+
 @admin.register(SeriesTitle)
 class SeriesTitleAdmin(admin.ModelAdmin):
-    pass
+    inlines = [PlatformReleasedSeriesInlineAdmin]
 
 
 @admin.register(Weapon)
