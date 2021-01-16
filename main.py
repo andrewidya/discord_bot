@@ -1,10 +1,19 @@
 import os
+import sys
 
 import discord
 from discord.ext import commands
 from discord.ext.commands.help import DefaultHelpCommand
 
+
 import config
+from guildmarm.settings import BASE_DIR
+
+
+sys.path.append(BASE_DIR)
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "guildmarm.settings")
+import django
+django.setup()
 
 
 TOKEN = os.getenv("BOT_TOKEN")
@@ -12,7 +21,8 @@ ECO = config.GUILD_ECOSYSTEM
 EXTENSIONS = [
     'cogs.greetings',
     'cogs.systems',
-    'cogs.game_roles'
+    'cogs.game_roles',
+    'cogs.roulette'
 ]
 
 
@@ -36,17 +46,6 @@ class HelpCommand(DefaultHelpCommand):
             return 'Command "{0.qualified_name}" tidak punya subcommand {1}'.format(
                         command, string)
         return 'Command "{0.qualified_name}" tidak punya subcommand'.format(command)
-
-    def get_max_size(self, commands):
-        as_lengths = []
-        for c in commands:
-            name = c.name
-            if c.aliases:
-                name += "|"
-                name += "|".join(c.aliases)
-            as_lengths.append(discord.utils._string_width(name))
-
-        return max(as_lengths, default=0)
 
 
 class GuildMarm(commands.Bot):
