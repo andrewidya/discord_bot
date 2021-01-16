@@ -1,4 +1,5 @@
 import os
+import sys
 
 import discord
 from discord.ext import commands
@@ -6,6 +7,13 @@ from discord.ext.commands.help import DefaultHelpCommand
 
 
 import config
+from guildmarm.settings import BASE_DIR
+
+
+sys.path.append(BASE_DIR)
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "guildmarm.settings")
+import django
+django.setup()
 
 
 TOKEN = os.getenv("BOT_TOKEN")
