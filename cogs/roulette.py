@@ -1,4 +1,4 @@
-from random import randint
+import random
 
 import discord
 from discord.ext import commands
@@ -18,6 +18,16 @@ class MonsterError(IndexError):
     pass
 
 
+def random_choice(data):
+    data_len = data.count()
+    _list = [i for i in range(data_len)]
+
+    for _ in range(data_len):
+        random.shuffle(_list)
+
+    return data[random.choice(_list)]
+
+
 class RouletteHunt(commands.Cog, name="roulette-hunt"):
     def __init__(self, bot):
         self.bot = bot
@@ -28,10 +38,13 @@ class RouletteHunt(commands.Cog, name="roulette-hunt"):
         channel = ctx.message.channel
 
         try:
-            suggestion = self.generate_data(channel)
+            async with ctx.typing():
+                suggestion = self.generate_data(channel)
             embed = discord.Embed(
                 title="Pesanan Quest", description="Hasil pencarian pesanan quest kali ini",
                 color=discord.Color.dark_blue())
+            if suggestion["series"]:
+                embed.add_field(name="Game", value=suggestion["series"], inline=False)
             embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/798908288778633287/800092481411612672/mh_crest.png")
             embed.add_field(name="Monster", value=suggestion["monster"], inline=True)
@@ -61,8 +74,9 @@ class RouletteHunt(commands.Cog, name="roulette-hunt"):
             raise MonsterError("Data Monster untuk seri {} belum ada".format(group))
 
         return {
-            "weapon": weapons[randint(0, weapons.count() - 1)],
-            "monster": monsters[randint(0, monsters.count() - 1)]
+            "weapon": random_choice(weapons),
+            "monster": random_choice(monsters),
+            "series": group.series.aliases
         }
 
 
