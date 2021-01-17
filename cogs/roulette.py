@@ -18,12 +18,13 @@ class MonsterError(IndexError):
     pass
 
 
-class RouletteHunt(commands.Cog):
+class RouletteHunt(commands.Cog, name="roulette-hunt"):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command(name="rng")
     async def rng_quest(self, ctx):
+        """Generate random monster dan weapon untuk quest"""
         channel = ctx.message.channel
 
         try:
