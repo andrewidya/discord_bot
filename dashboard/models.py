@@ -14,6 +14,9 @@ class Platform(models.Model):
 
 class SeriesTitle(models.Model):
     name = models.CharField(verbose_name="Name", max_length=60)
+    aliases = models.CharField(
+        verbose_name="Game Name Aliases", max_length=140, null=True, blank=True)
+    description = models.TextField(verbose_name="Description", null=True, blank=True)
     platform = models.ManyToManyField(
         Platform, through="PlatformReleasedSeries", verbose_name="Platforms")
 
@@ -96,3 +99,25 @@ class SeriesMonster(models.Model):
 
     def __str__(self):
         return self.group.series.name + ":" + self.monster.name
+
+
+class AdditionalProperties(models.Model):
+    GROUPING = {
+        ('style', 'Style'),
+        ('other', 'Other')
+    }
+
+    group = models.ForeignKey(
+        MonsterHunterDatabase, verbose_name="Series Name", on_delete=models.CASCADE)
+    name = models.CharField(verbose_name="Name", max_length=60)
+    description = models.TextField(verbose_name="Description", null=True, blank=True)
+    prop_grouping = models.CharField(
+        verbose_name="Label", max_length=20, choices=GROUPING)
+
+    class Meta:
+        verbose_name = "Additional Properties"
+        verbose_name_plural = "Additional Properties"
+
+    def __str__(self):
+        return self.group.series.name + ":" + self.name + ":" + self.prop_grouping
+    
