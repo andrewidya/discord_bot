@@ -3,7 +3,7 @@ from import_export.admin import ImportExportModelAdmin
 
 from dashboard.models import (
     Platform, SeriesTitle, Weapon, Monster, PlatformReleasedSeries,
-    MonsterHunterDatabase, SeriesWeapon, SeriesMonster)
+    MonsterHunterDatabase, SeriesWeapon, SeriesMonster, AdditionalProperties)
 
 # Register your models here.
 @admin.register(Platform)
@@ -35,21 +35,29 @@ class MonsterAdmin(ImportExportModelAdmin):
 class SeriesWeaponInlineAdmin(admin.TabularInline):
     model = SeriesWeapon
     autocomplete_fields = ['weapon']
-    extra = 0
+    extra = 1
     suit_classes = 'suit-tab suit-tab-series_weapon'
 
 
 class SeriesMonsterInlineAdmin(admin.TabularInline):
     model = SeriesMonster
     autocomplete_fields = ['monster']
-    extra = 0
+    extra = 1
     suit_classes = 'suit-tab suit-tab-series_monster'
+
+
+class SeriesAdditionalPropertiesAdmin(admin.TabularInline):
+    model = AdditionalProperties
+    extra = 1
+    min_num = 1
+    suit_classes = 'suit-tab suit-tab-additional'
 
 
 @admin.register(MonsterHunterDatabase)
 class MonsterHunterDatabaseAdmin(admin.ModelAdmin):
     list_display = ['series', 'discord_channel']
-    inlines = [SeriesWeaponInlineAdmin, SeriesMonsterInlineAdmin]
+    inlines = [
+        SeriesWeaponInlineAdmin, SeriesMonsterInlineAdmin, SeriesAdditionalPropertiesAdmin]
     fieldsets = [
         ('Series Title', {
             'classes': 'suit-tab suit-tab-series_title',
@@ -59,4 +67,4 @@ class MonsterHunterDatabaseAdmin(admin.ModelAdmin):
 
     suit_form_tabs = (
         ('series_title', 'Series Title'), ('series_weapon', 'Weapons'),
-        ('series_monster', 'Monsters'))
+        ('series_monster', 'Monsters'), ('additional', 'Additional'))
