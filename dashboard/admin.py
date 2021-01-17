@@ -1,4 +1,5 @@
 from django.contrib import admin
+from import_export.admin import ImportExportModelAdmin
 
 from dashboard.models import (
     Platform, SeriesTitle, Weapon, Monster, PlatformReleasedSeries,
@@ -26,7 +27,7 @@ class WeaponAdmin(admin.ModelAdmin):
 
 
 @admin.register(Monster)
-class MonsterAdmin(admin.ModelAdmin):
+class MonsterAdmin(ImportExportModelAdmin):
     list_display = ['name']
     search_fields = ['name']
 
