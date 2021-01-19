@@ -4,6 +4,7 @@ from import_export.admin import ImportExportModelAdmin
 from dashboard.models import (
     Platform, SeriesTitle, Weapon, Monster, PlatformReleasedSeries,
     MonsterHunterDatabase, SeriesWeapon, SeriesMonster, AdditionalProperties)
+from dashboard.forms import AdditionalPropertiesForm
 
 # Register your models here.
 @admin.register(Platform)
@@ -47,6 +48,7 @@ class SeriesMonsterInlineAdmin(admin.TabularInline):
 
 
 class SeriesAdditionalPropertiesAdmin(admin.TabularInline):
+    form = AdditionalPropertiesForm
     model = AdditionalProperties
     extra = 1
     min_num = 1
