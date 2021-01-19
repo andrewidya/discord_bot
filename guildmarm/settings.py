@@ -30,10 +30,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = []
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'dashboard'
+    'dashboard',
+    'import_export'
 ]
 
 MIDDLEWARE = [
