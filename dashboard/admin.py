@@ -51,7 +51,6 @@ class SeriesAdditionalPropertiesAdmin(admin.TabularInline):
     form = AdditionalPropertiesForm
     model = AdditionalProperties
     extra = 1
-    min_num = 1
     suit_classes = 'suit-tab suit-tab-additional'
 
 
