@@ -35,7 +35,7 @@ role_maps = {
     "cb": "charge-blade",
     "sa": "switch-axe",
     "bow": "bow",
-    "lbg": "ligth-bowgun",
+    "lbg": "light-bowgun",
     "hbg": "heavy-bowgun"
 }
 
